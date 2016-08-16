@@ -8,6 +8,8 @@
 第一支提供資料庫中的所有資料列表EX: Input : void , output :JSON { ID,Updatetime}
 第二支以賽事提供查詢文字內容與資料EX:Input : ID , output :JSON { ID,Updatetime, text}
 
+127.0.0.1/test/apiname.php?aa=all
+
 方案二
 寫一支背景PHP，把存在資料庫的資料取出並cache至memcached(或redis)
 寫一支客端php讀取memcached(或redis)輸出json至頁面EX: Input : void , output :JSON { ID,Updatetime}

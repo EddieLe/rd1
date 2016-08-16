@@ -111,3 +111,18 @@ for ($i = 1; $i < count($temp); $i++) {
         }
     }
 }
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script type="text/javascript">
+          setTimeout(function(){
+            location.reload();
+          },60000)
+        </script>
+    </body>
+</html>
