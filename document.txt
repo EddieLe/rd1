@@ -1,19 +1,0 @@
-寫一支PHP程式定時每1分鐘讀取網頁裡今日足球內容，將以下的欄位資訊解析存入mysql資料庫。
-讀取之網頁：http://www.228365365.com/sports.php
-欄位需包含：(請參考示意圖)聯賽、时间、赛事、独赢、全场-让球、全场-大小、单双、独赢、半场-让球、半场-大小
-
-
-方案一
-提供兩支Restful API
-第一支提供資料庫中的所有資料列表EX: Input : void , output :JSON { ID,Updatetime}
-第二支以賽事提供查詢文字內容與資料EX:Input : ID , output :JSON { ID,Updatetime, text}
-
-127.0.0.1/test/apiname.php?aa=all
-
-方案二
-寫一支背景PHP，把存在資料庫的資料取出並cache至memcached(或redis)
-寫一支客端php讀取memcached(或redis)輸出json至頁面EX: Input : void , output :JSON { ID,Updatetime}
-
-
-Projectname：ReadSoccerData
-研究【memcached 或 redis】的安裝與使用，並制做20頁PPT
