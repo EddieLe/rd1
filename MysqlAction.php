@@ -33,5 +33,14 @@ class MysqlAction
             ':halfBigSmall' => $halfBigSmall
             ]);
     }
+
+    function mysqlDelete()
+    {
+        $sql = "DELETE FROM `game` WHERE 1 = 1";
+        $mypod = new MyPDO();
+        $pod = $mypod->pdoConnect;
+        $stmt = $pod->prepare($sql);
+        $stmt->execute();
+    }
 }
-// phpinfo();
+

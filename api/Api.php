@@ -1,14 +1,14 @@
 <?php
-require_once 'MyPDO.php';
+require_once '../MyPDO.php';
 
 function api()
 {
     if (isset($_POST['type']) && $_POST['type'] == "all")
     {
-        $sql = "SELECT * FROM game limit 10";
-        $mypod = new MyPDO();
-        $pod = $mypod->pdoConnect;
-        $stmt = $pod->prepare($sql);
+        $sql = "SELECT * FROM `game` limit 10";
+        $mypdo = new MyPDO();
+        $pdo = $mypdo->pdoConnect;
+        $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $row = $stmt->fetchall(PDO::FETCH_ASSOC);
 
@@ -23,6 +23,7 @@ function api()
         ];
     }
     echo json_encode($respose);
+    return json_encode($respose);
 }
 
 api();

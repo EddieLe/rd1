@@ -19,7 +19,7 @@ curl_setopt($ch,CURLOPT_HEADER,false);
 curl_setopt($ch, CURLOPT_COOKIEFILE, __DIR__."/cookie.txt");
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 
-$temp=curl_exec($ch);
+$temp = curl_exec($ch);
 curl_close($ch);
 
 //移除倒回首頁判斷式
@@ -30,9 +30,9 @@ $temp = explode("parent.GameFT", $temp);
 for ($i = 1; $i < count($temp); $i++) {
     $result[$i] = explode(",", $temp[$i]);
 }
-
 //使用PDO寫入資料庫
 $mysqlAction = new MysqlAction();
+$mysqlAction->mysqlDelete();
 
 for ($i = 1; $i < count($temp); $i++) {
     for ($j = 1; $j <= 3; $j++) {

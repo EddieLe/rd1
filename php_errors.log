@@ -1,0 +1,4 @@
+[17-Aug-2016 03:39:49 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/ubuntu/workspace/rd1/api/ApiSearch.php on line 7
+[17-Aug-2016 04:11:21 UTC] PHP Fatal error:  Class 'Api' not found in /home/ubuntu/workspace/rd1/api/getDataApi.php on line 20
+[17-Aug-2016 04:11:21 UTC] PHP Stack trace:
+[17-Aug-2016 04:11:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/rd1/api/getDataApi.php:0

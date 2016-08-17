@@ -1,46 +1,48 @@
 <?php
-    // $redis = new Redis();
-    // $redis->connect('127.0.0.1',6379) or die ("could net connect redis server");
-    // $query = "SELECT * FROM `game` limit 8";
-    // //为了简单一点，这里就读取了8条数据
-    // for ($key = 1; $key < 9; $key++)
-    // {
-    //         if (!$redis->get($key))
-    //         {
-    //                 $connect = mysql_connect('127.0.0.1','root','123456');
-    //                 mysql_select_db(mytest);
-    //                 $result = mysql_query($query);
-    //                 //如果没有找到$key,就将该查询sql的结果缓存到redis
-    //                 while ($row = mysql_fetch_assoc($result))
-    //                 {
-    //                         $redis->set($row['id'],$row['name']);
-    //                 }
-    //                 $myserver = 'mysql';
-    //                 break;
-    //         }
-    //         else
-    //         {
-    //                 $myserver = "redis";
-    //                 $data[$key] = $redis->get($key);
-    //         }
+require_once 'MyPDO.php';
+
+function redisCache()
+{
+// while (true) {
+    $sql = "SELECT * FROM `game` limit 180";
+    $mypdo = new MyPDO();
+    $pdo = $mypdo->pdoConnect;
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $row = $stmt->fetchall(PDO::FETCH_ASSOC);
+
+    $redis = new redis();
+    $result = $redis->connect('127.0.0.1',6379) or die ("could net connect redis server");
+
+    for ($i = 0; $i < count($row); $i++) {
+        $redis->LPUSH('user_id', $row['id']);//(integer) 1
+        $redis->SET('user_game_' . $row[$i][id], $row[$i]['game']);
+        $redis->SET('user_time_' . $row[$i][id], $row[$i]['time']);
+        $redis->SET('user_gameDetail_' . $row[$i][id], $row[$i]['gameDetail']);
+        $redis->SET('user_allWin_' . $row[$i][id], $row[$i]['allWin']);
+        $redis->SET('user_allHandicap_' . $row[$i][id], $row[$i]['allHandicap']);
+        $redis->SET('user_allBigSmall_' . $row[$i][id], $row[$i]['allBigSmall']);
+        $redis->SET('user_oddEven_' . $row[$i][id], $row[$i]['oddEven']);
+        $redis->SET('user_halfWin_' . $row[$i][id], $row[$i]['halfWin']);
+        $redis->SET('user_halfHandicap_' . $row[$i][id], $row[$i]['halfHandicap']);
+        $redis->SET('user_halfBigSmall_' . $row[$i][id], $row[$i]['halfBigSmall']);
+    }
+    for ($i = 0; $i < count($row); $i++) {
+        $game[$i] = [$redis->GET('user_game_' . $row[$i][id]),
+        $redis->GET('user_time_' . $row[$i][id]),
+        $redis->GET('user_gameDetail_' . $row[$i][id]),
+        $redis->GET('user_allWin_' . $row[$i][id]),
+        $redis->GET('user_allHandicap_' . $row[$i][id]),
+        $redis->GET('user_allBigSmall_' . $row[$i][id]),
+        $redis->GET('user_oddEven_' . $row[$i][id]),
+        $redis->GET('user_halfWin_' . $row[$i][id]),
+        $redis->GET('user_halfHandicap_' . $row[$i][id]),
+        $redis->GET('user_halfBigSmall_' . $row[$i][id])];
+        echo json_encode($game) . "<br>";
+    }
+    // sleep(5);
     // }
-
-    // echo $myserver;
-    // echo "<br>";
-    // for ($key = 1; $key < 9; $key++)
-    // {
-    //         echo "number is <b><font color=#FF0000>$key</font></b>";
-
-    //         echo "<br>";
-
-    //         echo "name is <b><font color=#FF0000>$data[$key]</font></b>";
-
-    //         echo "<br>";
-    // }
-    echo date('h:i:s');
-while (true) {
-    set_time_limit(5); //reset execute time limit, greater than sleep time.
-    sleep(3);
-    echo date('h:i:s');
 }
-?>
+
+redisCache();
