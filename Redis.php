@@ -17,7 +17,7 @@ function redisCache()
         $redis = new redis();
         $result = $redis->connect('127.0.0.1',6379) or die ("could net connect redis server");
         //寫入redis
-        $redis->SET('gameData', json_encode($row));
+        $redis->set('gameData', json_encode($row));
 
     sleep(60);
     }

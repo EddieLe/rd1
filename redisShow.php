@@ -4,9 +4,8 @@ function redisShow()
     $redis = new redis();
     $result = $redis->connect('127.0.0.1',6379) or die ("could net connect redis server");
 
-    $game = $redis->GET('gameData');
+    $game = $redis->get('gameData');
     echo $game;
-
 }
 redisShow();
 ?>

@@ -8,7 +8,7 @@ ignore_user_abort(true);
 while (true) {
     $url = "http://www.228365365.com/sports.php";
     $url1 = "http://www.228365365.com/app/member/FT_browse/body_var.php?uid=test00&rtype=r&langx=zh-cn&mtype=3&page_no=0&league_id=&hot_game=undefined";
-    $url2 = "http://www.228365365.com/app/member/FT_future/body_var.php?uid=test00&rtype=r&langx=zh-cn&mtype=3&page_no=0&league_id=&hot_game=";
+    // $url2 = "http://www.228365365.com/app/member/FT_future/body_var.php?uid=test00&rtype=r&langx=zh-cn&mtype=3&page_no=0&league_id=&hot_game=";
     //讀取cookie寫入檔案
     $ch=curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -18,7 +18,7 @@ while (true) {
 
     $temp = curl_exec($ch);
     //使用檔案cookie進去iframe.php
-    curl_setopt($ch,CURLOPT_URL,$url2);
+    curl_setopt($ch,CURLOPT_URL,$url1);
     curl_setopt($ch,CURLOPT_HEADER,false);
     curl_setopt($ch, CURLOPT_COOKIEFILE, __DIR__."/cookie.txt");
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
