@@ -21,13 +21,17 @@ $ch = curl_init();
 curl_setopt($ch,CURLOPT_URL,"https://eddie-eddie-lee.c9users.io/rd1/api/Api.php");
 curl_setopt($ch,CURLOPT_HEADER,false);
 $temp = curl_exec($ch);
+
 echo $temp;
 echo  "<br>";
 
-echo "搜尋賽事" . "<br>";
+echo "搜尋賽事(預設全部)" . "<br>";
 $ch = curl_init();
 curl_setopt($ch,CURLOPT_URL,"https://eddie-eddie-lee.c9users.io/rd1/api/ApiSearch.php");
 curl_setopt($ch,CURLOPT_HEADER,false);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query( array( 'type' => $_POST['type']) ));
 $temp = curl_exec($ch);
+
 echo $temp;
 ?>

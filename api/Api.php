@@ -3,7 +3,7 @@ require_once '../MyPDO.php';
 
 function api()
 {
-    $sql = "SELECT * FROM `game` limit 10";
+    $sql = "SELECT * FROM `game`";
     $mypdo = new MyPDO();
     $pdo = $mypdo->pdoConnect;
     $stmt = $pdo->prepare($sql);
