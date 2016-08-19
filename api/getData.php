@@ -15,7 +15,5 @@ echo "全部賽事" . "<br>";
 $ch = curl_init();
 curl_setopt($ch,CURLOPT_URL,"https://eddie-eddie-lee.c9users.io/rd1/api/Api.php");
 curl_setopt($ch,CURLOPT_HEADER,false);
-$temp = curl_exec($ch);
-
-echo $temp;
+curl_exec($ch);
 ?>
